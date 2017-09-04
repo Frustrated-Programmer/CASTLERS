@@ -1,0 +1,14 @@
+{
+  "name": "castlers-bot",
+  "version": "0.0.1",
+  "description": "castlers bot",
+  "main": "game",
+  "scripts": {
+    "test": "node game.js"
+  },
+  "author": "Frustrated Programmer",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^11.1.0"
+  }
+}
