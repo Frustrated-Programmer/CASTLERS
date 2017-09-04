@@ -1498,7 +1498,7 @@ var commands = [
                         gameSettings.open = false;
                         message.channel.send("**GAME STARTED**\nGame-Mode: `" + gameSettings.mode + "`");
                         for (var i = 0; i < players.length; i++) {
-                            var ran = Math.round(Math.random() * (kingdoms.length-1);
+                            var ran = Math.round(Math.random() * (kingdoms.length-1));
                             players[i].kingdom = kingdoms[ran];
                             txt += "\n#" + (i + 1) + "-" + players[i].name + " - " + players[i].attackNum + " - alive";
                             if(gameSettings.factions){
