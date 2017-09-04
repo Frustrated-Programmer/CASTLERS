@@ -2,7 +2,7 @@
  * Created by elijah on 01-Jul-17.
  */
 
-var kingdoms = ["Ballaphry", "Hootsville", "Treetopia", "TECH-LAND", "THE #1 KING", "#1kingdom", "Shunvilla", "Junkyard", "Peepsville", "You all", "Coco-Factory"];
+var kingdoms = ["Ballaphry", "Hootsville", "Treetopia", "TECH-LAND", "THE #1 KING", "#1kingdom", "Shunvilla", "Junkyard", "Peepsville", "You all", "Coco-Factory","Nothing","mud"];
 var censoredWords = [];
 var gameNumber = 0;
 
@@ -1497,7 +1497,7 @@ var commands = [
                         gameSettings.open = false;
                         message.channel.send("**GAME STARTED**\nGame-Mode: `" + gameSettings.mode + "`");
                         for (var i = 0; i < players.length; i++) {
-                            var ran = Math.round(Math.random() * kingdoms.length);
+                            var ran = Math.round(Math.random() * (kingdoms.length-1);
                             players[i].kingdom = kingdoms[ran];
                             txt += "\n#" + (i + 1) + "-" + players[i].name + " - " + players[i].attackNum + " - alive";
                             if(gameSettings.factions){
