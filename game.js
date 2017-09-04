@@ -5,6 +5,7 @@
 var kingdoms = ["Ballaphry", "Hootsville", "Treetopia", "TECH-LAND", "THE #1 KING", "#1kingdom", "Shunvilla", "Junkyard", "Peepsville", "You all", "Coco-Factory","Nothing","mud"];
 var censoredWords = [];
 var gameNumber = 0;
+var version = "1.0.0";
 
 var specialIds = {
     previousMessageInGameLog: "",
@@ -1622,10 +1623,25 @@ var commands = [
         FPcommand: true,
         waitTime: 0,
         does: function (words, message, player) {
-            message.channel.send("restarting");
-            process.exit();
+            message.delete();
+            setTimeout(function(){ process.exit(); },1000);
         }
     },//restart program
+    {
+        names: ["version"],
+        description: "tells you what version is running",
+        usage: "version",
+        DMcom: false,
+        TXTcom: true,
+        gameGoing: false,
+        openPhase: false,
+        ModCommand: false,
+        FPcommand: false,
+        waitTime: 0,
+        does: function (words, message, player) {
+            message.channel.send("Version: `"+version+"`");
+        }
+    },//version
 
 
     {
