@@ -2,7 +2,6 @@
  * Created by elijah on 01-Jul-17.
  */
 
-
 var kingdoms = ["Ballaphry", "Hootsville", "Treetopia", "TECH-LAND", "THE #1 KING", "#1kingdom", "Shunvilla", "Junkyard", "Peepsville", "You all", "Coco-Factory"];
 var censoredWords = [];
 var gameNumber = 0;
@@ -381,7 +380,6 @@ var gameOver = function(over){
 
 bot.on("ready", function () {
     gameNumber = save.gameNumber;
-    bot.channels.get("344258099538034688").send("Im up and running :)");
     bot.user.setGame(defaultPrefix + "help");
     console.log("ready");
     censoredWords = save.censored;
@@ -1612,6 +1610,23 @@ var commands = [
             }
         }
     },//START
+    {
+        names: ["restart"],
+        description: "restarts the program",
+        usage: "restart",
+        DMcom: false,
+        TXTcom: true,
+        gameGoing: false,
+        openPhase: false,
+        ModCommand: false,
+        FPcommand: true,
+        waitTime: 0,
+        does: function (words, message, player) {
+            message.channel.send("restarting");
+            process.exit();
+        }
+    },//restart program
+
 
     {
         names: ["shop"],
