@@ -5,7 +5,7 @@
 var kingdoms = ["Ballaphry", "Hootsville", "Treetopia", "TECH-LAND", "THE #1 KING", "#1kingdom", "Shunvilla", "Junkyard", "Peepsville", "You all", "Coco-Factory","Nothing","mud"];
 var censoredWords = [];
 var gameNumber = 0;
-var version = "1.0.0";
+var version = "1.0.1";
 
 var specialIds = {
     previousMessageInGameLog: "",
