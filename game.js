@@ -2319,7 +2319,7 @@ var commands = [
                     }
                     msg += words[i] + " ";
                 }
-                var pla = 100;
+                var pla = "none";
                 for (var i = 0; i < players.length; i++) {
                     if (words[1].toLowerCase() === players[i].attackNum.toLowerCase()) {
                         pla = i;
@@ -2332,7 +2332,7 @@ var commands = [
                     message.channel.send("You are not allowed to share anyone's ATTACK-NUM(including if they are dead)")
                 }
                 if (!badThings.Name && !badThings.AttackNum) {
-                    if (pla !== 100) {
+                    if (typeof pla === "number") {
                         message.channel.send("Sent succesfully");
                         bot.users.get(players[pla].id).send("A enemy messenger is here with an message you can:\n`" + prefix + "read` and read the message **AND** let the messenger go free\n`" + prefix + "kill` and kill the messenger and **NOT** read the message\n`" + prefix + "ignore` and ignore the messenger completely\n\nif you do not respond in the next minute the messenger will leave without giving you the message");
                         messengers.push({msg: msg, to: pla, from: player, time: 60});
@@ -2865,7 +2865,7 @@ var commands = [
         waitTime: 60,
         does: function (words, message, player) {
             if (players[player].stuff.items.spy > 0) {
-                var pla = 100;
+                var pla = "none";
                 for (var i = 0; i < players.length; i++) {
                     if (players[i].attackNum.toLowerCase() === words[1].toLowerCase()) {
                         pla = i;
@@ -2877,7 +2877,7 @@ var commands = [
                 else if ((gameSettings.mode.toLowerCase() === "tdm" || gameSettings.mode.toLowerCase() === "tkoth") && players[pla].team === players[player].team) {
                     message.channen.send("You arent allowed to spy on your teammates")
                 }
-                else if (pla !== 100) {
+                else if (typeof pla === "number") {
                     message.channel.send("Your spy/spies are on the way, please wait `15` seconds for them to reach thier destination");
                     var spy = function(words,message,player,pla){
                         if(!players.length){
