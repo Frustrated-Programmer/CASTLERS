@@ -1108,7 +1108,8 @@ var commands = [
                 }
                 return t;
             }
-            for (var i = 0; i < Math.round(commands.length/2); i++) {
+            for (var i = 0; i < Math.round(
+		    .length/2); i++) {
                 txt+=getTxt(i);
             }
             message.channel.send(txt);
@@ -1137,7 +1138,7 @@ var commands = [
     {
         names: ["ping"],
         description: "ping the server and find how long is the response time",
-        usage: "pong",
+        usage: "ping",
         DMcom: false,
         TXTcom: false,
         gameGoing: false,
@@ -1240,6 +1241,7 @@ var commands = [
                 spacing = " ";
             }
             message.channel.send(txt);
+	    var txt = "";
             spacing = " ";
             for (var i = 10; i < commands.length; i++) {
                 for (var j = 0; j < longestLength - commands[i].usage.length; j++) {
