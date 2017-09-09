@@ -1108,8 +1108,7 @@ var commands = [
                 }
                 return t;
             }
-            for (var i = 0; i < Math.round(
-		    .length/2); i++) {
+            for (var i = 0; i < Math.round(commands.length/2); i++) {
                 txt+=getTxt(i);
             }
             message.channel.send(txt);
