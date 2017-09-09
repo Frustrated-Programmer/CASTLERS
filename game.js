@@ -2951,28 +2951,29 @@ var commands = [
         FPcommand: false,
         waitTime: 90,
         does: function (words, message, player) {
-            var pla = 100;
+            var pla = "none";
             if(words[1]){
                 for (var i = 0; i < players.length; i++) {
                     if (players[i].attackNum.toLowerCase() === words[1].toLowerCase()) {
                         pla = i;
                     }
                 }
-
-                if (pla === player) {
-                    message.channel.send("CONGRATULATIONS you know your ATTACK-NUM, sadly you cant attack yourself");
-                    console.log("Player: " + players[player].name + " has found his attack-num")
-                }
-                else if (players[pla].team === players[player].team && gameSettings.mode.toLowerCase() !== "ffa"&& gameSettings.mode.toLowerCase() !== "koth") {
-                    message.channel.send("You are not allowed to attack your team")
-                }
-                else if (pla !== 100) {
-                    message.channel.send("Attack is sent. Marching time: `1` minutes");
-                    bot.users.get(players[pla].id).send("You are under attack by the kingdom of `" + players[player].kingdom + "` You have 1 minute to prepare");
-                    setTimeout(function () {
-                        console.log("attacking Started");
-                        attackPlayer(player, pla);
-                    }, 60000);
+                if(typeof pla === "number"){
+                    if (pla === player) {
+                        message.channel.send("CONGRATULATIONS you know your ATTACK-NUM, sadly you cant attack yourself");
+                        console.log("Player: " + players[player].name + " has found his attack-num")
+                    }
+                    else if (players[pla].team === players[player].team && gameSettings.mode.toLowerCase() !== "ffa"&& gameSettings.mode.toLowerCase() !== "koth") {
+                        message.channel.send("You are not allowed to attack your team")
+                    }
+                    else {
+                        message.channel.send("Attack is sent. Marching time: `1` minutes");
+                        bot.users.get(players[pla].id).send("You are under attack by the kingdom of `" + players[player].kingdom + "` You have 1 minute to prepare");
+                        setTimeout(function () {
+                            console.log("attacking Started");
+                            attackPlayer(player, pla);
+                        }, 60000);
+                    }
                 }
                 else {
                     message.channel.send("ATTACK-NUM is invalid.\nPlease check your spelling or buy a scouter to find you a valid ATTACK-NUM")
