@@ -5,7 +5,7 @@
 var kingdoms = ["Ballaphry", "Hootsville", "Treetopia", "TECH-LAND", "THE #1 KING", "#1kingdom", "Shunvilla", "Junkyard", "Peepsville", "You all", "Coco-Factory","Nothing","mud"];
 var censoredWords = [];
 var gameNumber = 0;
-var version = "1.0.3";
+var version = "1.0.5";
 
 var specialIds = {
     previousMessageInGameLog: "",
@@ -1832,7 +1832,7 @@ var commands = [
                     }
                 }
                 return numWords;
-            }
+            };
             var numWords = getNumbers(message);
             var amount = 1;
             var where = "idk";
@@ -1854,131 +1854,135 @@ var commands = [
                     }
                 }
                 if (typeof where === "number") {
-                    if (canBuy(where, player, amount)) {
-                        switch (where) {
-                            case 0:
-                                players[player].stuff.items.scouter += amount;
-                                break;
-                            case 1:
-                                players[player].stuff.items.messenger += amount;
-                                break;
-                            case 2:
-                                players[player].stuff.items.farm += amount;
-                                break;
-                            case 3:
-                                players[player].stuff.items.house += amount;
-                                break;
-                            case 4:
-                                players[player].stuff.items.forge += amount;
-                                break;
-                            case 5:
-                                players[player].stuff.items.stoneblockHouse += amount;
-                                break;
-                            case 6:
-                                players[player].stuff.items.barn += amount;
-                                break;
-                            case 7:
-                                players[player].stuff.items.treasury += amount;
-                                break;
+                    if(where<23&&where>0) {
+                        if (canBuy(where, player, amount)) {
+                            switch (where) {
+                                case 0:
+                                    players[player].stuff.items.scouter += amount;
+                                    break;
+                                case 1:
+                                    players[player].stuff.items.messenger += amount;
+                                    break;
+                                case 2:
+                                    players[player].stuff.items.farm += amount;
+                                    break;
+                                case 3:
+                                    players[player].stuff.items.house += amount;
+                                    break;
+                                case 4:
+                                    players[player].stuff.items.forge += amount;
+                                    break;
+                                case 5:
+                                    players[player].stuff.items.stoneblockHouse += amount;
+                                    break;
+                                case 6:
+                                    players[player].stuff.items.barn += amount;
+                                    break;
+                                case 7:
+                                    players[player].stuff.items.treasury += amount;
+                                    break;
 
-                            case 8:
-                                players[player].stuff.items.antiSpy += amount;
-                                break;
-                            case 9:
-                                players[player].stuff.items.moats += amount;
-                                break;
-                            case 10:
-                                players[player].stuff.items.gates += amount;
-                                break;
-                            case 11:
-                                players[player].stuff.items.archers += amount;
-                                break;
-                            case 12:
-                                players[player].stuff.items.moltenIron += amount;
-                                break;
-                            case 13:
-                                players[player].stuff.items.catapult += amount;
-                                break;
-                            case 14:
-                                players[player].stuff.items.extraWalls += amount;
-                                break;
-                            case 15:
-                                players[player].stuff.items.spy += amount;
-                                break;
-                            case 16:
-                                players[player].stuff.items.spyTraining += amount;
-                                break;
-                            case 17:
-                                players[player].stuff.items.knights += amount;
-                                break;
-                            case 18:
-                                players[player].stuff.items.batteringRam += amount;
-                                break;
-                            case 19:
-                                players[player].stuff.items.bowmen += amount;
-                                break;
-                            case 20:
-                                players[player].stuff.items.chariots += amount;
-                                break;
-                            case 21:
-                                players[player].stuff.items.catapults += amount;
-                                break;
-                            case 22:
-                                players[player].stuff.items.ladderMen += amount;
-                                break;
-                            default:
-                                message.channel.send("Unknown ID! please check again");
-                                return;
-                            break;
-                        }
-                        if(players[player].faction.toLowerCase() === "defenders"&&where>7&&where<15){
-                            players[player].stuff.resources.stone -= Math.round(shop[where].price.stone * amount/2);
-                            players[player].stuff.resources.iron -= Math.round(shop[where].price.iron * amount/2);
-                            players[player].stuff.resources.gold -= Math.round(shop[where].price.gold * amount/2);
-                            players[player].stuff.resources.workers -= shop[where].price.workers * amount;
-                            players[player].stuff.resources.food -= Math.round(shop[where].price.food * amount/2);
-                            message.channel.send("Bought: `1` **" + shop[where].name + "**\nResources Spent:```css\n" +
-                                "Stone: " + Math.round(shop[where].price.stone * amount/2) + "    Iron: " + Math.round(shop[where].price.iron * amount/2) + "\n" +
-                                "Gold:  " + Math.round(shop[where].price.gold * amount/2) + "    Food: " + Math.round(shop[where].price.food * amount/2) + "\n" +
-                                "Workers: " + shop[where].price.workers * amount + "```\nPrice was cheaper because of your faction.");
-                        }
-                        else  if(players[player].faction.toLowerCase() === "marketplace"){
-                            players[player].stuff.resources.stone -= Math.round(shop[where].price.stone * amount/2);
-                            players[player].stuff.resources.iron -= Math.round(shop[where].price.iron * amount/2);
-                            players[player].stuff.resources.gold -= Math.round(shop[where].price.gold * amount/2);
-                            players[player].stuff.resources.workers -= shop[where].price.workers * amount;
-                            players[player].stuff.resources.food -= Math.round(shop[where].price.food * amount/2);
-                            message.channel.send("Bought: `1` **" + shop[where].name + "**\nResources Spent:```css\n" +
-                                "Stone: " + Math.round(shop[where].price.stone * amount/2) + "    Iron: " + Math.round(shop[where].price.iron * amount/2) + "\n" +
-                                "Gold:  " + Math.round(shop[where].price.gold * amount/2) + "    Food: " + Math.round(shop[where].price.food * amount/2) + "\n" +
-                                "Workers: " + shop[where].price.workers * amount + "```\nPrice was cheaper because of your faction.");
-                        }
-                        else if(players[player].faction.toLowerCase() === "attackers"&&where>=15){
-                            players[player].stuff.resources.stone -= Math.round(shop[where].price.stone * amount/2);
-                            players[player].stuff.resources.iron -= Math.round(shop[where].price.iron * amount/2);
-                            players[player].stuff.resources.gold -= Math.round(shop[where].price.gold * amount/2);
-                            players[player].stuff.resources.workers -= shop[where].price.workers * amount;
-                            players[player].stuff.resources.food -= Math.round(shop[where].price.food * amount/2);
-                            message.channel.send("Bought: `1` **" + shop[where].name + "**\nResources Spent:```css\n" +
-                                "Stone: " + Math.round(shop[where].price.stone * amount/2) + "    Iron: " + Math.round(shop[where].price.iron * amount/2) + "\n" +
-                                "Gold:  " + Math.round(shop[where].price.gold * amount/2) + "    Food: " + Math.round(shop[where].price.food * amount/2) + "\n" +
-                                "Workers: " + shop[where].price.workers * amount + "```\nPrice was cheaper because of your faction.");
+                                case 8:
+                                    players[player].stuff.items.antiSpy += amount;
+                                    break;
+                                case 9:
+                                    players[player].stuff.items.moats += amount;
+                                    break;
+                                case 10:
+                                    players[player].stuff.items.gates += amount;
+                                    break;
+                                case 11:
+                                    players[player].stuff.items.archers += amount;
+                                    break;
+                                case 12:
+                                    players[player].stuff.items.moltenIron += amount;
+                                    break;
+                                case 13:
+                                    players[player].stuff.items.catapult += amount;
+                                    break;
+                                case 14:
+                                    players[player].stuff.items.extraWalls += amount;
+                                    break;
+                                case 15:
+                                    players[player].stuff.items.spy += amount;
+                                    break;
+                                case 16:
+                                    players[player].stuff.items.spyTraining += amount;
+                                    break;
+                                case 17:
+                                    players[player].stuff.items.knights += amount;
+                                    break;
+                                case 18:
+                                    players[player].stuff.items.batteringRam += amount;
+                                    break;
+                                case 19:
+                                    players[player].stuff.items.bowmen += amount;
+                                    break;
+                                case 20:
+                                    players[player].stuff.items.chariots += amount;
+                                    break;
+                                case 21:
+                                    players[player].stuff.items.catapults += amount;
+                                    break;
+                                case 22:
+                                    players[player].stuff.items.ladderMen += amount;
+                                    break;
+                                default:
+                                    message.channel.send("Unknown ID! please check again");
+                                    return;
+                                    break;
+                            }
+                            if (players[player].faction.toLowerCase() === "defenders" && where > 7 && where < 15) {
+                                players[player].stuff.resources.stone -= Math.round(shop[where].price.stone * amount / 2);
+                                players[player].stuff.resources.iron -= Math.round(shop[where].price.iron * amount / 2);
+                                players[player].stuff.resources.gold -= Math.round(shop[where].price.gold * amount / 2);
+                                players[player].stuff.resources.workers -= shop[where].price.workers * amount;
+                                players[player].stuff.resources.food -= Math.round(shop[where].price.food * amount / 2);
+                                message.channel.send("Bought: `1` **" + shop[where].name + "**\nResources Spent:```css\n" +
+                                    "Stone: " + Math.round(shop[where].price.stone * amount / 2) + "    Iron: " + Math.round(shop[where].price.iron * amount / 2) + "\n" +
+                                    "Gold:  " + Math.round(shop[where].price.gold * amount / 2) + "    Food: " + Math.round(shop[where].price.food * amount / 2) + "\n" +
+                                    "Workers: " + shop[where].price.workers * amount + "```\nPrice was cheaper because of your faction.");
+                            }
+                            else if (players[player].faction.toLowerCase() === "marketplace") {
+                                players[player].stuff.resources.stone -= Math.round(shop[where].price.stone * amount / 2);
+                                players[player].stuff.resources.iron -= Math.round(shop[where].price.iron * amount / 2);
+                                players[player].stuff.resources.gold -= Math.round(shop[where].price.gold * amount / 2);
+                                players[player].stuff.resources.workers -= shop[where].price.workers * amount;
+                                players[player].stuff.resources.food -= Math.round(shop[where].price.food * amount / 2);
+                                message.channel.send("Bought: `1` **" + shop[where].name + "**\nResources Spent:```css\n" +
+                                    "Stone: " + Math.round(shop[where].price.stone * amount / 2) + "    Iron: " + Math.round(shop[where].price.iron * amount / 2) + "\n" +
+                                    "Gold:  " + Math.round(shop[where].price.gold * amount / 2) + "    Food: " + Math.round(shop[where].price.food * amount / 2) + "\n" +
+                                    "Workers: " + shop[where].price.workers * amount + "```\nPrice was cheaper because of your faction.");
+                            }
+                            else if (players[player].faction.toLowerCase() === "attackers" && where >= 15) {
+                                players[player].stuff.resources.stone -= Math.round(shop[where].price.stone * amount / 2);
+                                players[player].stuff.resources.iron -= Math.round(shop[where].price.iron * amount / 2);
+                                players[player].stuff.resources.gold -= Math.round(shop[where].price.gold * amount / 2);
+                                players[player].stuff.resources.workers -= shop[where].price.workers * amount;
+                                players[player].stuff.resources.food -= Math.round(shop[where].price.food * amount / 2);
+                                message.channel.send("Bought: `1` **" + shop[where].name + "**\nResources Spent:```css\n" +
+                                    "Stone: " + Math.round(shop[where].price.stone * amount / 2) + "    Iron: " + Math.round(shop[where].price.iron * amount / 2) + "\n" +
+                                    "Gold:  " + Math.round(shop[where].price.gold * amount / 2) + "    Food: " + Math.round(shop[where].price.food * amount / 2) + "\n" +
+                                    "Workers: " + shop[where].price.workers * amount + "```\nPrice was cheaper because of your faction.");
+                            }
+                            else {
+                                players[player].stuff.resources.stone -= shop[where].price.stone * amount;
+                                players[player].stuff.resources.iron -= shop[where].price.iron * amount;
+                                players[player].stuff.resources.gold -= shop[where].price.gold * amount;
+                                players[player].stuff.resources.workers -= shop[where].price.workers * amount;
+                                players[player].stuff.resources.food -= shop[where].price.food * amount;
+                                message.channel.send("Bought: `1` **" + shop[where].name + "**\nResources Spent:```css\n" +
+                                    "Stone: " + shop[where].price.stone * amount + "    Iron: " + shop[where].price.iron * amount + "\n" +
+                                    "Gold:  " + shop[where].price.gold * amount + "    Food: " + shop[where].price.food * amount + "\n" +
+                                    "Workers: " + shop[where].price.workers * amount + "```");
+                            }
+
                         }
                         else {
-                            players[player].stuff.resources.stone -= shop[where].price.stone * amount;
-                            players[player].stuff.resources.iron -= shop[where].price.iron * amount;
-                            players[player].stuff.resources.gold -= shop[where].price.gold * amount;
-                            players[player].stuff.resources.workers -= shop[where].price.workers * amount;
-                            players[player].stuff.resources.food -= shop[where].price.food * amount;
-                            message.channel.send("Bought: `1` **" + shop[where].name + "**\nResources Spent:```css\n" +
-                                "Stone: " + shop[where].price.stone * amount + "    Iron: " + shop[where].price.iron * amount + "\n" +
-                                "Gold:  " + shop[where].price.gold * amount + "    Food: " + shop[where].price.food * amount + "\n" +
-                                "Workers: " + shop[where].price.workers * amount + "```");
+                            message.channel.send("You do not have enough resources");
                         }
-
-                    }
-                    else {
-                        message.channel.send("You do not have enough resources");
+                    }else{
+                        message.channel.send("Unknown ID! please check again");
                     }
                 }
             }
